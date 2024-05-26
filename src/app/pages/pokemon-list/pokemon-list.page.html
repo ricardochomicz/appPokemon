@@ -1,13 +1,49 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>pokemonList</ion-title>
-  </ion-toolbar>
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Lista de Pokémons
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="toggleOrder()">
+                <ion-icon [name]="ascendingOrder ? 'arrow-up' : 'arrow-down'"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterPokemons($event)" placeholder="Search Pokémon"></ion-searchbar>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">pokemonList</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<ion-content >
+
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12" size-md="12" size-lg="12" *ngFor="let pokemon of filteredPokemons">
+                <ion-card>
+                    <ion-router-link [routerLink]="['/pokemon-detail/' + pokemon.name]">
+                        <ion-card-content>
+                            <ion-list lines="none">
+                                <ion-item>
+                                    <ion-thumbnail slot="start" class="pokemon-image">
+                                        <img alt="Silhouette of mountains" [src]="pokemon.image"/>
+                                    </ion-thumbnail>
+                                    <ion-label>{{ pokemon.name | uppercase }}</ion-label>
+                                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                                </ion-item>
+                            </ion-list>
+                        </ion-card-content>
+                    </ion-router-link>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadPokemons($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando Pokémons...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
 </ion-content>
