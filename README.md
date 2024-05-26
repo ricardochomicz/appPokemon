@@ -41,8 +41,8 @@ O aplicativo permite visualizar uma lista de Pokémon, visualizar detalhes de ca
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/ricardochomicz/pokemonApp.git
-   cd pokemonApp
+   git clone https://github.com/ricardochomicz/appPokemon.git
+   cd appPokemon
 
 2. Instale as dependências
    npm install
