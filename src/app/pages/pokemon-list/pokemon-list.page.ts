@@ -34,13 +34,13 @@ export class PokemonListPage implements OnInit {
         this.loading = true;
 
         this.pokemonService.getPokemonList(this.offset, this.limit).subscribe((response: PokemonApiResponse) => {
-            console.log(response)
             setTimeout(() => {
                 const newPokemons = response.results.map((pokemon, index) => {
                     const id = this.getParamUrlPokemon(pokemon.url);
                     return {
                         id: id,
                         name: pokemon.name,
+                        base_experience: pokemon.base_experience,
                         image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
                     };
                 });

@@ -27,10 +27,11 @@ export interface PokemonApiResponse {
     count: number;
     next: string;
     previous: string;
-    results: { name: string, url: string }[];
+    results: { name: string, url: string, base_experience: string }[];
 }
 
 export interface PokemonApiResult {
     name: string;
     url: string;
+    base_experience: string;
 }
