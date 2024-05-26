@@ -14,6 +14,8 @@ O aplicativo permite visualizar uma lista de Pokémon, visualizar detalhes de ca
 - Buscar Pokémon por nome
 - Ordenar por nome
 - Interface responsiva e adaptável a mudanças de orientação
+- Dark Mode
+- Rating
 
 ## Estrutura do Projeto
 
