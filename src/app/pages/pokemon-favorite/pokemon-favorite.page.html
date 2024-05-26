@@ -1,0 +1,40 @@
+
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Meus Favoritos</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-grid>
+        <ion-row *ngIf="pokemons">
+            <ion-col size="12" size-md="4" *ngFor="let pokemon of pokemons">
+                <ion-card class="ion-text-center">
+                    <ion-router-link [routerLink]="['/pokemon-detail', pokemon.name]">
+                        <img alt="{{pokemon.name}}"
+                             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon?.id}}.png"/>
+                        <ion-card-header>
+                            <ion-card-title>{{ pokemon.name | uppercase }}</ion-card-title>
+                        </ion-card-header>
+
+                        <ion-card-content>
+                            <p>Habilidade: {{ pokemon.abilities[0].ability.name }}</p>
+                            <p>Tipo: {{ pokemon.types[0].type.name }}</p>
+                            <p>Experiência: {{ pokemon.base_experience }}</p>
+                        </ion-card-content>
+                    </ion-router-link>
+
+                    <ion-avatar aria-hidden="true" (click)="toggleFavorite(pokemon)">
+                        <ion-icon [name]="isFavorite(pokemon.name) ? 'heart' : 'heart-outline'" size="large"
+                                  [color]="isFavorite(pokemon.name) ? 'danger' : 'dark'"></ion-icon>
+                    </ion-avatar>
+                </ion-card>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
