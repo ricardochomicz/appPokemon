@@ -5,6 +5,7 @@ export interface Pokemon {
     base_experience: string;
     weight: any;
     height: any;
+    rating: any;
     abilities: {
         ability: {
             name: string

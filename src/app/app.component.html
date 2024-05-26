@@ -12,9 +12,16 @@
                             <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'"
                                       [md]="p.icon + '-sharp'"></ion-icon>
                             <ion-label>{{ p.title }}</ion-label>
+                            <ion-text *ngIf="p.title === 'Meus Favoritos' && favoritesCount > 0">{{favoritesCount}}</ion-text>
                         </ion-item>
+
                     </ion-menu-toggle>
                 </ion-list>
+                <ion-buttons>
+                    <ion-button (click)="toggleTheme()">
+                        <ion-icon slot="icon-only" name="moon"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
             </ion-content>
         </ion-menu>
         <ion-router-outlet id="main-content"></ion-router-outlet>

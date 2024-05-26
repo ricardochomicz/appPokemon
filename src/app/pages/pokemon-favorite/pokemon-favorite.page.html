@@ -32,6 +32,12 @@
                         <ion-icon [name]="isFavorite(pokemon.name) ? 'heart' : 'heart-outline'" size="large"
                                   [color]="isFavorite(pokemon.name) ? 'danger' : 'dark'"></ion-icon>
                     </ion-avatar>
+                    <ion-icon *ngFor="let icon of [1, 2, 3, 4, 5]; let i = index"
+                              (click)="setRating(pokemon, i + 1)"
+                              [name]="i < (pokemon.rating) ? 'star' : 'star-outline'"
+                              [color]="i < (pokemon.rating) ? 'warning' : 'medium'"
+                              size="large">
+                    </ion-icon>
                 </ion-card>
 
             </ion-col>

@@ -8,12 +8,16 @@ import {BehaviorSubject} from "rxjs";
 export class FavoriteService {
 
     private storageKey = 'favoritePokemons';
+    private ratingsKey = 'ratings';
     private favorites: Pokemon[] = [];
+    private ratings: { [key: string]: number } = {};
+
     private favoritesSubject = new BehaviorSubject<number>(0);
 
 
     constructor() {
         this.loadFavorites()
+        this.loadRatings();
     }
 
     addFavorite(pokemon: Pokemon) {
@@ -46,6 +50,17 @@ export class FavoriteService {
 
     getFavoritesCount() {
         return this.favoritesSubject.asObservable();
+
+    }
+
+    setRating(pokemonName: string, rating: number) {
+        this.ratings[pokemonName] = rating;
+        sessionStorage.setItem(this.ratingsKey, JSON.stringify(this.ratings));
+    }
+
+    getRating(pokemon: Pokemon) {
+        this.loadRatings(); // Ensure ratings are loaded
+        return this.ratings[pokemon.name] || 0;
     }
 
     private saveFavorites() {
@@ -64,6 +79,14 @@ export class FavoriteService {
             console.log('Loading favorites. Count:', count);
             this.favoritesSubject.next(count);
         }
+    }
+
+    private loadRatings() {
+        const ratings = sessionStorage.getItem(this.ratingsKey);
+        this.ratings = ratings ? JSON.parse(ratings) : {};
+        this.getFavorites().forEach(pokemon => {
+            this.ratings[pokemon.name] = this.ratings[pokemon.name];
+        });
     }
 
 }

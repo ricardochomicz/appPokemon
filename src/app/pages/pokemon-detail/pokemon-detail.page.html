@@ -1,0 +1,81 @@
+
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Info Pokémon - {{ pokemon?.name | uppercase }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-card *ngIf="pokemon">
+        <ion-card-content class="ion-text-center">
+            <div class="image-container">
+                <img alt="{{pokemon?.name}}"
+                     src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon?.id}}.png"/>
+            </div>
+        </ion-card-content>
+        <ion-card-header class="ion-text-center">
+            <ion-card-title>
+                <ion-text> {{ pokemon?.name | uppercase }} </ion-text>
+            </ion-card-title>
+
+            <ion-avatar aria-hidden="true" (click)="toggleFavorite(pokemon)">
+                <ion-icon [name]="isFavorite(pokemon.name) ? 'heart' : 'heart-outline'" size="large"
+                          [color]="isFavorite(pokemon.name) ? 'danger' : 'dark'"></ion-icon>
+            </ion-avatar>
+
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <ion-avatar aria-hidden="true" slot="start">
+                        <ion-icon name="accessibility-outline" size="large"></ion-icon>
+                    </ion-avatar>
+
+                    <ion-label color="warning">Altura: {{ height }} m</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-avatar aria-hidden="true" slot="start">
+                        <ion-icon name="barbell-outline" size="large"></ion-icon>
+                    </ion-avatar>
+
+                    <ion-label color="warning">Peso: {{ weight }} kg</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-avatar aria-hidden="true" slot="start">
+                        <ion-icon name="medal-outline" size="large"></ion-icon>
+                    </ion-avatar>
+
+                    <ion-label color="warning">Experiência: {{ pokemon?.base_experience }}</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-avatar aria-hidden="true" slot="start">
+                        <ion-icon name="diamond-outline" size="large"></ion-icon>
+                    </ion-avatar>
+
+                    <ion-label color="warning">Habilidade: {{ abilities }}</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-avatar aria-hidden="true" slot="start">
+                        <ion-icon name="id-card-outline" size="large"></ion-icon>
+                    </ion-avatar>
+
+                    <ion-label color="warning">Tipo: {{ types }}</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-avatar aria-hidden="true" slot="start">
+                        <ion-icon name="move-outline" size="large"></ion-icon>
+                    </ion-avatar>
+
+                    <ion-label color="warning">Movimento: {{ moves }}</ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <ion-content class="ion-padding">
+        <ion-toast trigger="open-toast"></ion-toast>
+    </ion-content>
+</ion-content>

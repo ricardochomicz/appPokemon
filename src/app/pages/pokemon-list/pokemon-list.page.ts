@@ -22,7 +22,7 @@ export class PokemonListPage implements OnInit {
     }
 
     ngOnInit() {
-        this.loadPokemons();
+       this.loadPokemons();
     }
 
 
@@ -34,6 +34,7 @@ export class PokemonListPage implements OnInit {
         this.loading = true;
 
         this.pokemonService.getPokemonList(this.offset, this.limit).subscribe((response: PokemonApiResponse) => {
+            console.log(response)
             setTimeout(() => {
                 const newPokemons = response.results.map((pokemon, index) => {
                     const id = this.getParamUrlPokemon(pokemon.url);
