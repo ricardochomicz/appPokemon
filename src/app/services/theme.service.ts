@@ -7,30 +7,30 @@ import {BehaviorSubject} from "rxjs";
 export class ThemeService {
 
     private darkTheme = false;
+    paletteToggle = false;
 
     constructor() {}
 
-    toggleTheme() {
-        this.darkTheme = !this.darkTheme;
-        document.body.classList.toggle('dark-theme', this.darkTheme);
+    toggleTheme(){
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        this.initializeDarkPalette(prefersDark.matches);
+        prefersDark.addEventListener('change', (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches));
     }
 
-    // private currentThemeSubject: BehaviorSubject<string>;
-    //
-    // constructor() {
-    //     // Inicializa o tema atual com o tema padrão (dark)
-    //     this.currentThemeSubject = new BehaviorSubject<string>('dark');
+    initializeDarkPalette(isDark: any) {
+        this.paletteToggle = isDark;
+        this.toggleDarkPalette(isDark);
+    }
+
+    // toggleChange(ev: any) {
+    //     this.toggleDarkPalette(ev.detail.checked);
     // }
-    //
-    // // Obtém o tema atual como um Observable
-    // getCurrentTheme() {
-    //     return this.currentThemeSubject.asObservable();
-    // }
-    //
-    // // Alterna entre os temas
-    // toggleTheme() {
-    //     const currentTheme = this.currentThemeSubject.getValue();
-    //     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    //     this.currentThemeSubject.next(newTheme);
-    // }
+
+    toggleDarkPalette(shouldAdd: any) {
+        document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
+    }
+
+    isDarkTheme(): boolean {
+        return this.darkTheme;
+    }
 }

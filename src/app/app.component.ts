@@ -11,10 +11,9 @@ export class AppComponent implements OnInit{
     { title: 'Login', url: '/login', icon: 'person-circle' },
     { title: 'Pokémon', url: '/pokemons', icon: 'bug' },
     { title: 'Meus Favoritos', url: '/pokemon-favorites', icon: 'heart' },
-    // { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    // { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    // { title: 'Spam', url: '/folder/spam', icon: 'warning' },
   ];
+
+    paletteToggle = false;
 
     favoritesCount: number = 0;
     constructor(private favoriteService: FavoriteService, private themeService: ThemeService) {
@@ -25,9 +24,12 @@ export class AppComponent implements OnInit{
         this.favoriteService.getFavoritesCount().subscribe(count => {
             this.favoritesCount = count;
         });
+        this.paletteToggle = true;
+      this.themeService.toggleTheme()
     }
 
-    toggleTheme() {
-        this.themeService.toggleTheme();
+    toggleChange(ev: any) {
+        this.themeService.toggleDarkPalette(ev.detail.checked);
     }
+
 }

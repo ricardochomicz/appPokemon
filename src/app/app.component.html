@@ -17,11 +17,12 @@
 
                     </ion-menu-toggle>
                 </ion-list>
-                <ion-buttons>
-                    <ion-button (click)="toggleTheme()">
-                        <ion-icon slot="icon-only" name="moon"></ion-icon>
-                    </ion-button>
-                </ion-buttons>
+
+                <ion-item>
+                    <ion-toggle [(ngModel)]="paletteToggle" name="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between"
+                    >Dark Mode</ion-toggle
+                    >
+                </ion-item>
             </ion-content>
         </ion-menu>
         <ion-router-outlet id="main-content"></ion-router-outlet>
