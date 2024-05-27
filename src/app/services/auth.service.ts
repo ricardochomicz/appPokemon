@@ -38,13 +38,15 @@ export class AuthService {
             signInOptions: [
                 {
                     provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+
                     recaptchaParameters: {
                         type: 'image', // 'audio'
                         size: 'normal', // 'invisible' or 'compact'
                         badge: 'bottomleft' //' bottomright' or 'inline' applies to invisible.
                     },
                     defaultCountry: 'BR',
-                }
+                },
+                firebase.auth.EmailAuthProvider.PROVIDER_ID,
             ],
             callbacks: {
                 signInSuccessWithAuthResult: (authResult: any, redirectUrl: any) => {
@@ -53,9 +55,7 @@ export class AuthService {
                 }
             }
         };
-        const auth = getAuth()
-        auth.useDeviceLanguage()
-        auth.languageCode = 'pt-BR'
+        firebase.auth().languageCode = 'pt-BR'
         firebase.auth().useDeviceLanguage()
         // @ts-ignore
         this.ui.start(elementId, uiConfig);
@@ -72,21 +72,5 @@ export class AuthService {
             console.error('Error ao fazer o logout: ', error);
         });
     }
-
-    // pega o telefone do usuário autenticado
-    getUserPhoneNumber(): Promise<string | null> {
-        return new Promise((resolve, reject) => {
-            firebase.auth().onAuthStateChanged((user) => {
-                if (user) {
-                    resolve(user.phoneNumber);
-                } else {
-                    resolve(null);
-                }
-            }, (error) => {
-                reject(error);
-            });
-        });
-    }
-
 
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {PokemonService} from "../../services/pokemon.service";
 import {Pokemon, PokemonApiResponse} from "../../models";
 import {Router} from "@angular/router";
-import firebase from "firebase/compat/app";
 
 @Component({
   selector: 'app-pokemon-list',
@@ -16,7 +15,6 @@ export class PokemonListPage implements OnInit {
     ascendingOrder: boolean = true;
     offset: number = 0;
     limit: number = 10;
-    public progress = 0;
     searchTerm: string = '';
 
     constructor(private pokemonService: PokemonService, private router: Router) {
@@ -28,8 +26,6 @@ export class PokemonListPage implements OnInit {
 
 
     loadPokemons(event?: any) {
-
-
 
         this.pokemonService.getPokemonList(this.offset, this.limit).subscribe((response: PokemonApiResponse) => {
             setTimeout(() => {
