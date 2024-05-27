@@ -1,35 +1,46 @@
 import {Component, OnInit} from '@angular/core';
 import {FavoriteService} from "./services/favorite.service";
 import {ThemeService} from "./services/theme.service";
+import {AuthService} from "./services/auth.service";
+
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements OnInit{
-  public appPages = [
-    { title: 'Login', url: '/login', icon: 'person-circle' },
-    { title: 'Pokémon', url: '/pokemons', icon: 'bug' },
-    { title: 'Meus Favoritos', url: '/pokemon-favorites', icon: 'heart' },
-  ];
+export class AppComponent implements OnInit {
+    public appPages = [
+        {title: 'Pokémon', url: '/pokemons', icon: 'bug'},
+        {title: 'Meus Favoritos', url: '/pokemon-favorites', icon: 'heart'},
+    ];
+
+    userAuthenticated = false;
 
     paletteToggle = false;
 
     favoritesCount: number = 0;
-    constructor(private favoriteService: FavoriteService, private themeService: ThemeService) {
+
+    constructor(private favoriteService: FavoriteService, private themeService: ThemeService, private authService: AuthService) {
 
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.favoriteService.getFavoritesCount().subscribe(count => {
             this.favoritesCount = count;
         });
         this.paletteToggle = true;
-      this.themeService.toggleTheme()
+        this.themeService.toggleTheme()
+        this.authService.isUserAuthenticated().subscribe(isAuthenticated => {
+            this.userAuthenticated = isAuthenticated;
+        });
     }
 
     toggleChange(ev: any) {
         this.themeService.toggleDarkPalette(ev.detail.checked);
+    }
+
+    logout(){
+        this.authService.logout();
     }
 
 }

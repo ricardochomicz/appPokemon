@@ -11,14 +11,20 @@
                                   routerLinkActive="selected">
                             <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'"
                                       [md]="p.icon + '-sharp'"></ion-icon>
-                            <ion-label>{{ p.title }}</ion-label>
-                            <ion-text *ngIf="p.title === 'Meus Favoritos' && favoritesCount > 0">{{favoritesCount}}</ion-text>
+                            <ion-label >{{ p.title }}</ion-label>
+                            <ion-text *ngIf="p.title === 'Meus Favoritos' && favoritesCount > 0 && userAuthenticated">{{favoritesCount}}</ion-text>
                         </ion-item>
 
                     </ion-menu-toggle>
+
                 </ion-list>
 
-                <ion-item>
+                <ion-item (click)="logout()" lines="none" class="logout">
+                    <ion-icon slot="start" name="power"></ion-icon>
+                    <ion-label>Sair</ion-label>
+                </ion-item>
+
+                <ion-item lines="none">
                     <ion-toggle [(ngModel)]="paletteToggle" name="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between"
                     >Dark Mode</ion-toggle
                     >
