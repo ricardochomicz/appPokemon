@@ -3,6 +3,7 @@ import {Pokemon} from "../../models";
 import {FavoriteService} from "../../services/favorite.service";
 import {ToggleFavoriteService} from "../../services/toggle-favorite.service";
 import {RatingService} from "../../services/rating.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-pokemon-favorite',
@@ -10,20 +11,24 @@ import {RatingService} from "../../services/rating.service";
   styleUrls: ['./pokemon-favorite.page.scss'],
 })
 export class PokemonFavoritePage implements OnInit {
-    rat: number = 0
+
     @Input() rating: number = 0
     @Input() poke: Pokemon | undefined;
     @Output() ratingChange = new EventEmitter<{ poke: Pokemon, rating: number }>();
     pokemons: Pokemon[] = [];
     pokemon: Pokemon | undefined;
+    userAuthenticated = false;
 
     constructor(private favoriteService: FavoriteService,
                 private toggleFavoriteService: ToggleFavoriteService,
-                private ratingService: RatingService) {
+                private authService: AuthService) {
     }
 
     ngOnInit() {
         this.getFavorites()
+        this.authService.isUserAuthenticated().subscribe(isAuthenticated => {
+            this.userAuthenticated = isAuthenticated;
+        });
 
     }
 

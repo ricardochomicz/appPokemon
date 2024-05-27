@@ -1,1 +1,12 @@
 
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura da viewport */
+    text-align: center;
+}
+
+.center-message {
+    padding: 1rem; /* Espaçamento interno para a mensagem */
+}

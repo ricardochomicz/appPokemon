@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Pokemon} from "../../models";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PokemonService} from "../../services/pokemon.service";
 import {ToggleFavoriteService} from "../../services/toggle-favorite.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -18,10 +19,15 @@ export class PokemonDetailPage implements OnInit {
     abilities!: string;
     types!: string;
 
+    userAuthenticated = false;
+
 
     constructor(private route: ActivatedRoute,
                 private pokemonService: PokemonService,
-                private toggleFavoriteService: ToggleFavoriteService) {
+                private toggleFavoriteService: ToggleFavoriteService,
+                private authService: AuthService,
+                private router: Router
+                ) {
     }
 
     ngOnInit() {
@@ -39,7 +45,7 @@ export class PokemonDetailPage implements OnInit {
     }
 
     toggleFavorite(pokemon: Pokemon) {
-        this.toggleFavoriteService.toggleFavorite(pokemon);
+            this.toggleFavoriteService.toggleFavorite(pokemon);
     }
 
     isFavorite(pokemonName: string): boolean {

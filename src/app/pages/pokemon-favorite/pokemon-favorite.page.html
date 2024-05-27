@@ -1,4 +1,3 @@
-
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-buttons slot="start">
@@ -10,39 +9,46 @@
 
 
 <ion-content>
-    <ion-grid>
-        <ion-row *ngIf="pokemons">
-            <ion-col size="12" size-md="4" *ngFor="let pokemon of pokemons">
-                <ion-card class="ion-text-center">
-                    <ion-router-link [routerLink]="['/pokemon-detail', pokemon.name]">
-                        <img alt="{{pokemon.name}}"
-                             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon?.id}}.png"/>
-                        <ion-card-header>
-                            <ion-title>{{ pokemon.name | uppercase }}</ion-title>
-                        </ion-card-header>
+    <div *ngIf="userAuthenticated">
+        <ion-grid>
+            <ion-row *ngIf="pokemons">
+                <ion-col size="12" size-md="4" *ngFor="let pokemon of pokemons">
+                    <ion-card class="ion-text-center">
+                        <ion-router-link [routerLink]="['/pokemon-detail', pokemon.name]">
+                            <img alt="{{pokemon.name}}"
+                                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon?.id}}.png"/>
+                            <ion-card-header>
+                                <ion-title>{{ pokemon.name | uppercase }}</ion-title>
+                            </ion-card-header>
 
+                            <ion-card-content>
+                                <p>Habilidade: {{ pokemon.abilities[0].ability.name }}</p>
+                                <p>Tipo: {{ pokemon.types[0].type.name }}</p>
+                                <p>Experiência: {{ pokemon.base_experience }}</p>
+                            </ion-card-content>
+                        </ion-router-link>
+
+                        <ion-avatar aria-hidden="true" (click)="toggleFavorite(pokemon)">
+                            <ion-icon [name]="isFavorite(pokemon.name) ? 'heart' : 'heart-outline'" size="large"
+                                      [color]="isFavorite(pokemon.name) ? 'danger' : 'dark'"></ion-icon>
+                        </ion-avatar>
                         <ion-card-content>
-                            <p>Habilidade: {{ pokemon.abilities[0].ability.name }}</p>
-                            <p>Tipo: {{ pokemon.types[0].type.name }}</p>
-                            <p>Experiência: {{ pokemon.base_experience }}</p>
+                            <ion-icon *ngFor="let icon of [1, 2, 3, 4, 5]; let i = index"
+                                      (click)="setRating(pokemon, i + 1)"
+                                      [name]="i < (pokemon.rating) ? 'star' : 'star-outline'"
+                                      [color]="i < (pokemon.rating) ? 'warning' : 'medium'"
+                                      size="large">
+                            </ion-icon>
                         </ion-card-content>
-                    </ion-router-link>
+                    </ion-card>
 
-                    <ion-avatar aria-hidden="true" (click)="toggleFavorite(pokemon)">
-                        <ion-icon [name]="isFavorite(pokemon.name) ? 'heart' : 'heart-outline'" size="large"
-                                  [color]="isFavorite(pokemon.name) ? 'danger' : 'dark'"></ion-icon>
-                    </ion-avatar>
-                    <ion-card-content>
-                    <ion-icon *ngFor="let icon of [1, 2, 3, 4, 5]; let i = index"
-                              (click)="setRating(pokemon, i + 1)"
-                              [name]="i < (pokemon.rating) ? 'star' : 'star-outline'"
-                              [color]="i < (pokemon.rating) ? 'warning' : 'medium'"
-                              size="large">
-                    </ion-icon>
-                    </ion-card-content>
-                </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 
-            </ion-col>
-        </ion-row>
-    </ion-grid>
 </ion-content>
+<div *ngIf="!userAuthenticated" class="center-container">
+    <!-- Mensagem ou ações para usuários não autenticados -->
+    <ion-header class="center-message">Usuário não autenticado. Faça <ion-router-link [routerLink]="['/login']">aqui seu login</ion-router-link> para ver os favoritos.</ion-header>
+</div>
