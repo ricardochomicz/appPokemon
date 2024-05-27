@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Pokemon} from "../../models";
 import {FavoriteService} from "../../services/favorite.service";
 import {ToggleFavoriteService} from "../../services/toggle-favorite.service";
-import {RatingService} from "../../services/rating.service";
 import {AuthService} from "../../services/auth.service";
 
 @Component({
@@ -29,7 +28,6 @@ export class PokemonFavoritePage implements OnInit {
         this.authService.isUserAuthenticated().subscribe(isAuthenticated => {
             this.userAuthenticated = isAuthenticated;
         });
-
     }
 
     getFavorites() {
@@ -37,7 +35,6 @@ export class PokemonFavoritePage implements OnInit {
         this.pokemons.forEach(pokemon => {
             this.getRating(pokemon)
         });
-
     }
 
     toggleFavorite(pokemon: Pokemon) {

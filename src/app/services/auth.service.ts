@@ -73,5 +73,20 @@ export class AuthService {
         });
     }
 
+    // pega o telefone do usuário autenticado
+    getUserPhoneNumber(): Promise<string | null> {
+        return new Promise((resolve, reject) => {
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    resolve(user.phoneNumber);
+                } else {
+                    resolve(null);
+                }
+            }, (error) => {
+                reject(error);
+            });
+        });
+    }
+
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PokemonService} from "../../services/pokemon.service";
 import {Pokemon, PokemonApiResponse} from "../../models";
 import {Router} from "@angular/router";
+import firebase from "firebase/compat/app";
 
 @Component({
   selector: 'app-pokemon-list',
@@ -15,7 +16,7 @@ export class PokemonListPage implements OnInit {
     ascendingOrder: boolean = true;
     offset: number = 0;
     limit: number = 10;
-    loading: boolean = false;
+    public progress = 0;
     searchTerm: string = '';
 
     constructor(private pokemonService: PokemonService, private router: Router) {
@@ -28,13 +29,11 @@ export class PokemonListPage implements OnInit {
 
     loadPokemons(event?: any) {
 
-        if (this.loading) {
-            return;
-        }
-        this.loading = true;
+
 
         this.pokemonService.getPokemonList(this.offset, this.limit).subscribe((response: PokemonApiResponse) => {
             setTimeout(() => {
+
                 const newPokemons = response.results.map((pokemon, index) => {
                     const id = this.getParamUrlPokemon(pokemon.url);
                     return {
@@ -49,15 +48,10 @@ export class PokemonListPage implements OnInit {
                 this.sortPokemons();
                 this.filterPokemons();
                 this.offset += this.limit;
-                this.loading = false;
 
-                if (event) {
-                    event.target.complete();
-                }
-            }, 1500);
+            }, 1000);
         }, error => {
             console.error('Erro ao listar Pokémons', error);
-            this.loading = false;
             if (event) {
                 event.target.complete();
             }

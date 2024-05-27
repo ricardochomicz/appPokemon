@@ -11,7 +11,7 @@
 <ion-content>
     <div *ngIf="userAuthenticated">
         <ion-grid>
-            <ion-row *ngIf="pokemons">
+            <ion-row *ngIf="pokemons && pokemons.length > 0">
                 <ion-col size="12" size-md="4" *ngFor="let pokemon of pokemons">
                     <ion-card class="ion-text-center">
                         <ion-router-link [routerLink]="['/pokemon-detail', pokemon.name]">

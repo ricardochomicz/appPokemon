@@ -33,10 +33,7 @@ export class ToggleFavoriteService {
                     this.toastService.toastMessage('Pokémon adicionado aos favoritos!');
                 }
             }
-
         });
-
-
     }
 
     isFavorite(pokemonName: string): boolean {
