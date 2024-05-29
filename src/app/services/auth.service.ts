@@ -4,13 +4,8 @@ import * as firebaseui from 'firebaseui'
 import {environment} from "../../environments/environment";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Router} from '@angular/router';
-import 'firebase/auth';
-import {AngularFirestore} from '@angular/fire/compat/firestore';
-import 'firebase/firestore';
+
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {HttpClient} from "@angular/common/http";
-import {getAuth} from "firebase/auth";
-import User = firebase.User;
 
 @Injectable({
     providedIn: 'root'
@@ -23,9 +18,7 @@ export class AuthService {
 
     constructor(
         private router: Router,
-        private afAuth: AngularFireAuth,
-        private afs: AngularFirestore,
-        private httpClient: HttpClient) {
+        private afAuth: AngularFireAuth,) {
         const app = firebase.initializeApp(environment.firebaseConfig);
         const auth = firebase.auth()
 

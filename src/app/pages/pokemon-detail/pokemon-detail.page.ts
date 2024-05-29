@@ -5,7 +5,6 @@ import {PokemonService} from "../../services/pokemon.service";
 import {ToggleFavoriteService} from "../../services/toggle-favorite.service";
 import {AuthService} from "../../services/auth.service";
 import firebase from "firebase/compat/app";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {ToastService} from "../../services/toast.service";
 
 @Component({

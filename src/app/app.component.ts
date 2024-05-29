@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FavoriteService} from "./services/favorite.service";
 import {ThemeService} from "./services/theme.service";
 import {AuthService} from "./services/auth.service";
-import firebase from "firebase/compat/app";
 
 @Component({
     selector: 'app-root',
@@ -21,7 +20,9 @@ export class AppComponent implements OnInit {
 
     favoritesCount: number = 0;
 
-    constructor(private favoriteService: FavoriteService, private themeService: ThemeService, private authService: AuthService) {
+    constructor(private favoriteService: FavoriteService,
+                private themeService: ThemeService,
+                private authService: AuthService) {
 
         const user = this.authService.getUserUidSession()
         if (user) {

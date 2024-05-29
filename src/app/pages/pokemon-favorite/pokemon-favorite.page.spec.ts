@@ -1,6 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PokemonFavoritePage} from './pokemon-favorite.page';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../../../environments/environment";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 describe('PokemonFavoritePage', () => {
     let component: PokemonFavoritePage;
@@ -8,7 +11,8 @@ describe('PokemonFavoritePage', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule]
+            imports: [HttpClientTestingModule, AngularFireModule.initializeApp(environment.firebaseConfig), // Inicialize o AngularFire com sua configuração
+                AngularFireAuthModule]
         });
         fixture = TestBed.createComponent(PokemonFavoritePage);
         component = fixture.componentInstance;

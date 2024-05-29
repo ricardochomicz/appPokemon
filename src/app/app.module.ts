@@ -10,9 +10,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {environment} from "../environments/environment";
 import {AngularFireModule} from "@angular/fire/compat";
-import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
-
-
 
 @NgModule({
     declarations: [
@@ -26,7 +23,6 @@ import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
         HttpClientModule,
         FormsModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireDatabaseModule
     ],
     providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
     bootstrap: [AppComponent],

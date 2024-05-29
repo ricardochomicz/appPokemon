@@ -4,6 +4,10 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ActivatedRoute, convertToParamMap} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {UppercasePipeMock} from "../../pipes/uppercase.pipe.mock";
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../../../environments/environment";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+
 
 
 class ActivatedRouteMock {
@@ -24,11 +28,12 @@ describe('PokemonDetailPage', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule],
+            imports: [HttpClientTestingModule, AngularFireModule.initializeApp(environment.firebaseConfig), // Inicialize o AngularFire com sua configuração
+                AngularFireAuthModule],
             providers: [
                 {provide: ActivatedRoute, useClass: ActivatedRouteMock}
             ],
-            declarations: [UppercasePipeMock]
+            declarations: []
         });
         fixture = TestBed.createComponent(PokemonDetailPage);
         component = fixture.componentInstance;
@@ -37,5 +42,12 @@ describe('PokemonDetailPage', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+});
+
+describe('Pipe: uppercase', () => {
+    it('create an instance', () => {
+        let pipe = new UppercasePipeMock();
+        expect(pipe).toBeTruthy();
     });
 });

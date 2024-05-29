@@ -4,12 +4,7 @@ import {FavoriteService} from "../../services/favorite.service";
 import {ToggleFavoriteService} from "../../services/toggle-favorite.service";
 import {AuthService} from "../../services/auth.service";
 import {WebSocketService} from "../../services/web-socket.service";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
-import firebase from "firebase/compat/app";
 
-
-class SessionStorageService {
-}
 
 @Component({
     selector: 'app-pokemon-favorite',
@@ -29,8 +24,7 @@ export class PokemonFavoritePage implements OnInit {
     constructor(private favoriteService: FavoriteService,
                 private toggleFavoriteService: ToggleFavoriteService,
                 private authService: AuthService,
-                private webSocketService: WebSocketService,
-                private afAuth: AngularFireAuth) {
+                private webSocketService: WebSocketService) {
         this.loadFavorites();
     }
 

@@ -2,10 +2,7 @@ import {Injectable} from '@angular/core';
 import {Pokemon} from "../models";
 import {BehaviorSubject, Observable} from "rxjs";
 import {AuthService} from "./auth.service";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import firebase from "firebase/compat/app";
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +17,6 @@ export class FavoriteService {
     private favoritesSubject = new BehaviorSubject<number>(0);
 
     constructor(private authService: AuthService,
-                private afAuth: AngularFireAuth,
                 private http: HttpClient) {
         const user = this.authService.getUserUidSession()
         if (user) {

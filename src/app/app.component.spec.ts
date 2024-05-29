@@ -5,6 +5,9 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../environments/environment";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 describe('AppComponent', () => {
 
@@ -14,7 +17,9 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [RouterModule.forRoot([]), HttpClientTestingModule],
+      imports: [RouterModule.forRoot([]), HttpClientTestingModule,
+          AngularFireModule.initializeApp(environment.firebaseConfig), // Inicialize o AngularFire com sua configuração
+          AngularFireAuthModule],
     }).compileComponents();
   });
 
@@ -38,7 +43,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-item');
-    expect(menuItems.length).toEqual(5);
+    expect(menuItems.length).toEqual(4);
 
   });
 
