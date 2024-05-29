@@ -6,7 +6,10 @@
         <ion-title>Meus Favoritos</ion-title>
     </ion-toolbar>
 </ion-header>
-
+<div *ngIf="receivedData">
+    <h3>Dados Recebidos do WebHook:</h3>
+    <pre>{{ receivedData | json }}</pre>
+</div>
 
 <ion-content>
     <div *ngIf="userAuthenticated">

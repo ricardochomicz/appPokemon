@@ -7,8 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { PokemonFavoritePageRoutingModule } from './pokemon-favorite-routing.module';
 
 import { PokemonFavoritePage } from './pokemon-favorite.page';
-import {RatingComponent} from "../../components/rating/rating.component";
-
 
 @NgModule({
     imports: [
