@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FavoriteService} from "./services/favorite.service";
 import {ThemeService} from "./services/theme.service";
 import {AuthService} from "./services/auth.service";
+import firebase from "firebase/compat/app";
 
 @Component({
     selector: 'app-root',
@@ -22,12 +23,19 @@ export class AppComponent implements OnInit {
 
     constructor(private favoriteService: FavoriteService, private themeService: ThemeService, private authService: AuthService) {
 
+        const user = this.authService.getUserUidSession()
+        if (user) {
+            this.favoriteService.getFavoritesCount().subscribe(count => {
+                this.favoritesCount = count;
+            });
+
+            // Carregar favoritos para inicializar o contador
+            this.favoriteService.getFavorites(user);
+        }
+
     }
 
     ngOnInit() {
-        this.favoriteService.getFavoritesCount().subscribe(count => {
-            this.favoritesCount = count;
-        });
         this.paletteToggle = true;
         this.themeService.toggleTheme()
         this.authService.isUserAuthenticated().subscribe(isAuthenticated => {
@@ -39,7 +47,7 @@ export class AppComponent implements OnInit {
         this.themeService.toggleDarkPalette(ev.detail.checked);
     }
 
-    logout(){
+    logout() {
         this.authService.logout();
     }
 
