@@ -66,6 +66,13 @@ O aplicativo permite visualizar uma lista de Pokémon, visualizar detalhes de ca
    ionic cordova run ios
 
 ## Telas
-![pokemon](https://github.com/ricardochomicz/pokemonApp/assets/58947372/efdfacab-ba93-4371-8543-4317313b629b)
-![pokemon2](https://github.com/ricardochomicz/pokemonApp/assets/58947372/eafab299-dbd3-4b58-9304-dbfb2f0b78b7)
-![pokemon3](https://github.com/ricardochomicz/pokemonApp/assets/58947372/b4287e6e-b177-4af7-b6db-5eb92fdbc411)
+![image](https://github.com/ricardochomicz/appPokemon/assets/58947372/405dc4a1-cca9-4f2e-99bc-6f0ab119aed9)
+![image](https://github.com/ricardochomicz/appPokemon/assets/58947372/ba072e46-b1a3-4c1a-b3ec-96c360c6511b)
+![image](https://github.com/ricardochomicz/appPokemon/assets/58947372/2512213f-91cd-442e-852c-942345142066)
+
+## Vídeo
+![pokemon_app](https://github.com/ricardochomicz/appPokemon/assets/58947372/68269ddb-e09c-4047-a167-4f4159cd2776)
+
+
+
+
