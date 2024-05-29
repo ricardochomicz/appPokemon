@@ -30,13 +30,18 @@ export class AuthService {
             this.ui = new firebaseui.auth.AuthUI(auth);
         }
 
+        // Ouve mudanças no estado de autenticação do Firebase Authentication.
         firebase.auth().onAuthStateChanged(user => {
+            //Quando o estado de autenticação muda, atualiza a váriavel
             this.currentUser = user;
         });
 
+        // Cria um BehaviorSubject para acompanhar o estado de autenticação do usuário.
+        // Inicializa como 'false' indicando que, por padrão, o usuário não está autenticado.
         this.userAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
         firebase.auth().onAuthStateChanged(user => {
+            // indica se o usuário está autenticado (true) ou não (false).
             this.userAuthenticatedSubject.next(!!user);
         });
     }
@@ -53,7 +58,7 @@ export class AuthService {
             ],
             callbacks: {
                 signInSuccessWithAuthResult: (authResult: any, redirectUrl: any) => {
-                    console.log(authResult)
+
                     this.saveUserUidToSession()
                     this.router.navigate(['/pokemons']);
 
@@ -73,11 +78,12 @@ export class AuthService {
     async saveUserUidToSession() {
         const user = await this.afAuth.currentUser;
         if (user) {
+            //salva o uid do usuário autenticado na chave userUid
             localStorage.setItem('userUid', user.uid);
         }
     }
 
-    getUserUidSession(){
+    getUserUidSession() {
         return localStorage.getItem('userUid')
     }
 
