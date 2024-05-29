@@ -7,10 +7,7 @@ const routes: Routes = [
     redirectTo: 'pokemons',
     pathMatch: 'full'
   },
-  {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
+
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
@@ -26,6 +23,10 @@ const routes: Routes = [
   {
     path: 'pokemon-detail/:pokemon',
     loadChildren: () => import('./pages/pokemon-detail/pokemon-detail.module').then( m => m.PokemonDetailPageModule)
+  },
+  {
+    path: 'myaccount',
+    loadChildren: () => import('./pages/myaccount/myaccount.module').then( m => m.MyaccountPageModule)
   }
 ];
 
