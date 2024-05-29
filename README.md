@@ -77,7 +77,9 @@ O aplicativo permite visualizar uma lista de Pokémon, visualizar detalhes de ca
 
 ## Telas
 ![image](https://github.com/ricardochomicz/appPokemon/assets/58947372/405dc4a1-cca9-4f2e-99bc-6f0ab119aed9)
+
 ![image](https://github.com/ricardochomicz/appPokemon/assets/58947372/ba072e46-b1a3-4c1a-b3ec-96c360c6511b)
+
 ![image](https://github.com/ricardochomicz/appPokemon/assets/58947372/2512213f-91cd-442e-852c-942345142066)
 
 ## Vídeo
