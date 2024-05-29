@@ -1,5 +1,5 @@
 export interface Pokemon {
-    id: number;
+    id?: string;
     name: string;
     image: string;
     base_experience: string;
@@ -34,4 +34,11 @@ export interface PokemonApiResult {
     name: string;
     url: string;
     base_experience: string;
+}
+
+export interface User{
+    uid?: string;
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
 }
