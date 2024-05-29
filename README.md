@@ -72,6 +72,7 @@ O aplicativo permite visualizar uma lista de Pokémon, visualizar detalhes de ca
    node server.js
 
 ## Test
+ng test
 ![image](https://github.com/ricardochomicz/appPokemon/assets/58947372/9eb440bb-a5fc-406e-929e-370b7e7c1209)
 
 
