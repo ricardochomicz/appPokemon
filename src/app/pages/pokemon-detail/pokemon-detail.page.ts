@@ -34,9 +34,10 @@ export class PokemonDetailPage implements OnInit {
     }
 
     ngOnInit() {
+
         this.authService.isUserAuthenticated().subscribe(isAuthenticated => {
-            this.userAuthenticated = isAuthenticated;
-            if (!this.userAuthenticated) {
+
+            if (!isAuthenticated) {
                 this.toastService.toastMessage('Usuário não autenticado.');
                 this.router.navigate(['/login']);
             }

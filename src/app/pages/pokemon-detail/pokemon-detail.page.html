@@ -10,6 +10,9 @@
 
 <ion-content [fullscreen]="true">
     <ion-card *ngIf="pokemon">
+        <ion-router-link fill="outline" [routerLink]="['/pokemons']">
+            <ion-icon name="arrow-back-circle-outline" size="large" class="ion-margin-top ion-margin-start"></ion-icon>
+        </ion-router-link>
         <ion-card-content class="ion-text-center">
             <div class="image-container">
                 <img alt="{{pokemon?.name}}"
