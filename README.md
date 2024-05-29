@@ -31,6 +31,8 @@ O aplicativo permite visualizar uma lista de Pokémon, visualizar detalhes de ca
       - `pokemon-favorites/` - Página para exibir Pokémon favoritos
   - `assets/` - Contém os arquivos estáticos do projeto
   - `environments/` - Contém os arquivos de configuração de ambiente
+- `webhook/`
+  - `server.js` - Salva em um arquivo JSON os dados do Pokémon favoritado e uid do usuário autenticado
 
 ## Configuração do Ambiente de Desenvolvimento
 
@@ -64,6 +66,14 @@ O aplicativo permite visualizar uma lista de Pokémon, visualizar detalhes de ca
 
 7. Rodar dispositivo IOS
    ionic cordova run ios
+
+8. WebHook
+   cd webhook
+   node server.js
+
+## Test
+![image](https://github.com/ricardochomicz/appPokemon/assets/58947372/9eb440bb-a5fc-406e-929e-370b7e7c1209)
+
 
 ## Telas
 ![image](https://github.com/ricardochomicz/appPokemon/assets/58947372/405dc4a1-cca9-4f2e-99bc-6f0ab119aed9)
