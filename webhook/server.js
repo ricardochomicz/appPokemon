@@ -50,6 +50,6 @@ app.post('/webhook', (req, res) => {
     });
 });
 
-// server.listen(8080, () => {
-//     console.log('Server started on port 8080');
-// });
+server.listen(8080, () => {
+    console.log('Server started on port 8080');
+});
