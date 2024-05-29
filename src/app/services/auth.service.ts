@@ -69,6 +69,7 @@ export class AuthService {
 
         // Usa o idioma do dispositivo para a autenticação
         firebase.auth().useDeviceLanguage();
+        firebase.auth().languageCode = 'pt-BR';
 
         // Inicia a interface de usuário do Firebase Authentication com a configuração fornecida
         // @ts-ignore
