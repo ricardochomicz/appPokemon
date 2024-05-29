@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Pokemon} from "../../models";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PokemonService} from "../../services/pokemon.service";
 import {ToggleFavoriteService} from "../../services/toggle-favorite.service";
 import {AuthService} from "../../services/auth.service";
+import firebase from "firebase/compat/app";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 @Component({
-  selector: 'app-pokemon-detail',
-  templateUrl: './pokemon-detail.page.html',
-  styleUrls: ['./pokemon-detail.page.scss'],
+    selector: 'app-pokemon-detail',
+    templateUrl: './pokemon-detail.page.html',
+    styleUrls: ['./pokemon-detail.page.scss'],
 })
 export class PokemonDetailPage implements OnInit {
 
@@ -26,11 +28,13 @@ export class PokemonDetailPage implements OnInit {
                 private pokemonService: PokemonService,
                 private toggleFavoriteService: ToggleFavoriteService,
                 private authService: AuthService,
-                private router: Router
-                ) {
+                private router: Router,
+                private afAuth: AngularFireAuth
+    ) {
     }
 
     ngOnInit() {
+
         const pokemonId = this.route.snapshot.paramMap.get('pokemon');
         if (pokemonId) {
             this.pokemonService.getPokemonByName(pokemonId).subscribe((pokemon: Pokemon) => {
@@ -45,10 +49,16 @@ export class PokemonDetailPage implements OnInit {
     }
 
     toggleFavorite(pokemon: Pokemon) {
+        if(this.authService.isUserAuthenticated()){
             this.toggleFavoriteService.toggleFavorite(pokemon);
+        }
+
     }
 
-    isFavorite(pokemonName: string): boolean {
-        return this.toggleFavoriteService.isFavorite(pokemonName);
+
+    isFavorite(pokemonName: string): any {
+        if(this.authService.isUserAuthenticated()) {
+            return this.toggleFavoriteService.isFavorite(pokemonName)
+        }
     }
 }
