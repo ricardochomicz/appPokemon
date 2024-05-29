@@ -48,26 +48,26 @@ O aplicativo permite visualizar uma lista de Pokémon, visualizar detalhes de ca
    git clone https://github.com/ricardochomicz/appPokemon.git
    cd appPokemon
 
-2. Instale as dependências
+2. Instale as dependências -
    npm install
 
-3. Adicione as plataformas
+3. Adicione as plataformas -
    ionic cordova platform add android
    ionic cordova platform add ios
 
-4. Iniciar servidor de desenvolvimento
+4. Iniciar servidor de desenvolvimento -
    ionic serve
 
-5. Construir projeto para produção
+5. Construir projeto para produção -
    ionic build
 
-6. Rodar dispositivo Android
+6. Rodar dispositivo Android -
    ionic cordova run android
 
-7. Rodar dispositivo IOS
+7. Rodar dispositivo IOS -
    ionic cordova run ios
 
-8. WebHook
+8. WebHook -
    cd webhook
    node server.js
 
