@@ -43,7 +43,7 @@ export class ToggleFavoriteService {
     isFavorite(pokemonName: string): any {
         const user = this.authService.getUserUidSession()
         // @ts-ignore
-        this.favoriteService.isFavorite(pokemonName, user);
+        return this.favoriteService.isFavorite(pokemonName, user);
     }
 
 

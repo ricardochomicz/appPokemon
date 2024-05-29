@@ -31,23 +31,17 @@ export class PokemonFavoritePage implements OnInit {
                 private authService: AuthService,
                 private webSocketService: WebSocketService,
                 private afAuth: AngularFireAuth) {
-
+        this.loadFavorites();
     }
 
     ngOnInit() {
         this.authService.isUserAuthenticated().subscribe(isAuthenticated => {
             this.userAuthenticated = isAuthenticated;
         });
-         this.afAuth.onAuthStateChanged(user => {
-             if(user){
-                 if (user.uid === this.authService.getUserUidSession()) {
-                     this.loadFavorites();
-                 }
-             }
+
+        this.webSocketService.getDataObservable().subscribe(data => {
+            this.receivedData = data;
         });
-        // this.webSocketService.getDataObservable().subscribe(data => {
-        //     this.receivedData = data;
-        // });
     }
 
     loadFavorites() {
@@ -65,7 +59,7 @@ export class PokemonFavoritePage implements OnInit {
     }
 
     isFavorite(pokemonName: string): any {
-         this.toggleFavoriteService.isFavorite(pokemonName)
+        return this.toggleFavoriteService.isFavorite(pokemonName)
     }
 
     setRating(pokemon: Pokemon, rating: number) {
@@ -74,9 +68,9 @@ export class PokemonFavoritePage implements OnInit {
     }
 
     getRating(pokemon: Pokemon) {
-        const user = this.authService.getUserUidSession()
-        // @ts-ignore
-        pokemon.rating = this.favoriteService.getRating(pokemon, user)
+           // @ts-ignore
+        return pokemon.rating = this.favoriteService.getRating(pokemon)
+
     }
 
 }

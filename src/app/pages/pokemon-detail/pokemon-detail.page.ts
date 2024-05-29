@@ -6,6 +6,7 @@ import {ToggleFavoriteService} from "../../services/toggle-favorite.service";
 import {AuthService} from "../../services/auth.service";
 import firebase from "firebase/compat/app";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {ToastService} from "../../services/toast.service";
 
 @Component({
     selector: 'app-pokemon-detail',
@@ -29,36 +30,46 @@ export class PokemonDetailPage implements OnInit {
                 private toggleFavoriteService: ToggleFavoriteService,
                 private authService: AuthService,
                 private router: Router,
-                private afAuth: AngularFireAuth
+                private toastService: ToastService
     ) {
     }
 
     ngOnInit() {
-
-        const pokemonId = this.route.snapshot.paramMap.get('pokemon');
-        if (pokemonId) {
-            this.pokemonService.getPokemonByName(pokemonId).subscribe((pokemon: Pokemon) => {
-                this.pokemon = pokemon;
-                this.height = (pokemon.height / 10).toFixed(1);
-                this.weight = (pokemon.weight / 10).toFixed(2);
-                this.abilities = pokemon.abilities[0].ability.name
-                this.types = pokemon.types[0].type.name
-                this.moves = pokemon.moves[0].move.name
-            });
-        }
+        this.authService.isUserAuthenticated().subscribe(isAuthenticated => {
+            this.userAuthenticated = isAuthenticated;
+            if (!this.userAuthenticated) {
+                this.toastService.toastMessage('Usuário não autenticado.');
+                this.router.navigate(['/login']);
+            }
+            const pokemonId = this.route.snapshot.paramMap.get('pokemon');
+            if (pokemonId) {
+                this.pokemonService.getPokemonByName(pokemonId).subscribe((pokemon: Pokemon) => {
+                    this.pokemon = pokemon;
+                    this.height = (pokemon.height / 10).toFixed(1);
+                    this.weight = (pokemon.weight / 10).toFixed(2);
+                    this.abilities = pokemon.abilities[0].ability.name
+                    this.types = pokemon.types[0].type.name
+                    this.moves = pokemon.moves[0].move.name
+                });
+            }
+        });
     }
 
     toggleFavorite(pokemon: Pokemon) {
-        if(this.authService.isUserAuthenticated()){
-            this.toggleFavoriteService.toggleFavorite(pokemon);
-        }
-
+        this.toggleFavoriteService.toggleFavorite(pokemon);
     }
 
 
     isFavorite(pokemonName: string): any {
-        if(this.authService.isUserAuthenticated()) {
-            return this.toggleFavoriteService.isFavorite(pokemonName)
-        }
+        const user = this.authService.getUserUidSession()
+        const us = firebase.auth().currentUser
+
+            if(us && us.uid === user){
+                // @ts-ignore
+                return this.toggleFavoriteService.isFavorite(pokemonName, user)
+            }
+
+
+
     }
 }
