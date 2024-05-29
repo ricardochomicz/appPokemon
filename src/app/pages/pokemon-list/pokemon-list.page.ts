@@ -20,6 +20,13 @@ export class PokemonListPage implements OnInit {
     constructor(private pokemonService: PokemonService, private router: Router) {
     }
 
+    handleRefresh(event: any) {
+        setTimeout(() => {
+            this.loadPokemons();
+            event.target.complete();
+        }, 2000);
+    }
+
     ngOnInit() {
        this.loadPokemons();
     }

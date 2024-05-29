@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
             // Carregar favoritos para inicializar o contador
             this.favoriteService.getFavorites(user);
         }
-
     }
 
     ngOnInit() {

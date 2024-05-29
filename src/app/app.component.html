@@ -2,6 +2,7 @@
     <ion-split-pane contentId="main-content">
         <ion-menu contentId="main-content" type="overlay">
             <ion-content>
+
                 <ion-list id="inbox-list">
                     <ion-list-header>Pokémon</ion-list-header>
                     <ion-note>Gotta catch 'em all!</ion-note>
@@ -29,8 +30,11 @@
                     >Dark Mode</ion-toggle
                     >
                 </ion-item>
+
             </ion-content>
         </ion-menu>
-        <ion-router-outlet id="main-content"></ion-router-outlet>
+        <ion-router-outlet id="main-content">
+        </ion-router-outlet>
     </ion-split-pane>
+
 </ion-app>
