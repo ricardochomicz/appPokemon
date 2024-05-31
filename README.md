@@ -69,6 +69,7 @@ O aplicativo permite visualizar uma lista de Pokémon, visualizar detalhes de ca
 
 8. WebHook -
    cd webhook
+   npm install
    node server.js
 
 ## Test
